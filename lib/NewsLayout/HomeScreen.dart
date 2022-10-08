@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_news/NewsLayout/Cubit/Cubit.dart';
 import 'package:new_news/NewsLayout/Cubit/States.dart';
 import 'package:new_news/NewsLayout/Screens/SearchScreen.dart';
-import 'package:new_news/compoents.dart';
+import 'package:new_news/components.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);

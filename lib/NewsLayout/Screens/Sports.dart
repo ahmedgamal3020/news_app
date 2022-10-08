@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_news/NewsLayout/Cubit/Cubit.dart';
 import 'package:new_news/NewsLayout/Cubit/States.dart';
-import 'package:new_news/compoents.dart';
+import 'package:new_news/components.dart';
 
 class sports extends StatelessWidget {
   const sports({Key? key}) : super(key: key);
