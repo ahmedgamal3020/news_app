@@ -61,7 +61,7 @@ Widget buildItemList(ar,context)=> InkWell(
   ),
 );
 
-//scrol the items
+//scroll the items
 Widget buildListOFItems(
     @required int ittemCount,
     @required Widget separator,
