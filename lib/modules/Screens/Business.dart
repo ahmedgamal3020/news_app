@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_news/NewsLayout/Cubit/Cubit.dart';
 import 'package:new_news/NewsLayout/Cubit/States.dart';
-import 'package:new_news/components.dart';
+import 'package:new_news/conponents/components.dart';
 
 class business extends StatelessWidget {
   const business({Key? key}) : super(key: key);

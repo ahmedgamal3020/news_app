@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:new_news/NewsLayout/Screens/web_view_screen.dart';
+import 'package:new_news/modules/Screens/web_view_screen.dart';
 
 //List Item From API
 Widget buildItemList(ar,context)=> InkWell(
@@ -66,7 +66,6 @@ Widget buildListOFItems(
     @required int ittemCount,
     @required Widget separator,
     @required Widget Items(index)
-
     )=>ListView.separated(
     physics:const BouncingScrollPhysics() ,
     itemCount:ittemCount,
@@ -76,18 +75,16 @@ Widget buildListOFItems(
 );
 
 Widget defaultTextFromField(
-    {
-   OnChange,
-    String? Validat,
-    @required String? Lable,
-    KeyboardType,
-    @required IconData? PrefixIcon,
-    Controller,
-    ontap
-       }
-  )=>TextFormField (
-   onTap:ontap,
-   controller: Controller,
+        {OnChange,
+        String? Validat,
+        @required String? Lable,
+        KeyboardType,
+        @required IconData? PrefixIcon,
+        Controller,
+        ontap}) =>
+    TextFormField(
+      onTap: ontap,
+      controller: Controller,
    keyboardType: KeyboardType,
   onChanged:OnChange,
   validator:(String? value)

@@ -1,32 +1,27 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_news/Network/SharedHelper.dart';
 import 'package:new_news/Network/dioHelper.dart';
 import 'package:new_news/NewsLayout/Cubit/States.dart';
-import 'package:new_news/NewsLayout/Screens/Business.dart';
-import 'package:new_news/NewsLayout/Screens/Science.dart';
-import 'package:new_news/NewsLayout/Screens/Settings.dart';
-import 'package:new_news/NewsLayout/Screens/Sports.dart';
+import 'package:new_news/modules/Screens/Business.dart';
+import 'package:new_news/modules/Screens/Science.dart';
+import 'package:new_news/modules/Screens/Settings.dart';
+import 'package:new_news/modules/Screens/Sports.dart';
 
+class NewsCubit extends Cubit<NewsStates> {
+  NewsCubit() : super(NewsInitialStates());
 
-
-class NewsCubit extends Cubit<NewsStates>{
-
-  NewsCubit(): super(NewsInitialStates());
-  static NewsCubit get (context)=>BlocProvider.of(context);
-  int CurrentIndex=0;
-  List<String> appBar=[
+  static NewsCubit get(context) => BlocProvider.of(context);
+  int currentIndex = 0;
+  List<String> appBar = const [
     'Business News',
     'Sports News',
     'Science News',
     'Settings',
   ];
-  List<BottomNavigationBarItem> itemBottom=const[
+  List<BottomNavigationBarItem> itemBottom = const [
     BottomNavigationBarItem(
-        icon:Icon(Icons.business_center_rounded),
-      label: 'Business'
-    ),
+        icon: Icon(Icons.business_center_rounded), label: 'Business'),
     BottomNavigationBarItem(
         icon:Icon(Icons.sports),
         label: 'Sports'
@@ -48,7 +43,7 @@ class NewsCubit extends Cubit<NewsStates>{
   ];
 
   void changeIndex(int index){
-    CurrentIndex=index;
+    currentIndex = index;
     emit(NewsChangeButtonNavStates());
   }
 
@@ -101,58 +96,46 @@ class NewsCubit extends Cubit<NewsStates>{
           'country': 'eg',
           'category': 'science',
           'apiKey': 'cdad916ab5184dccaa943436cdae85d1',
-        }
-    ).then((value) {
-      newsScience=value.data['articles'];
+    }).then((value) {
+      newsScience = value.data['articles'];
       emit(NewsDataScienceSuccessStates());
-    }).catchError((error){
+    }).catchError((error) {
       print('${error.toString()} science');
       emit(NewsDataScienceErrorStates(error.toString()));
     });
   }
 
-    String? chick;
-  List<dynamic>newsSearch =[];
-  void getNewsSearch(value)
-  {
-    newsSearch=[];
+  String? chick;
+  List<dynamic> newsSearch = [];
+
+  void getNewsSearch(value) {
+    newsSearch = [];
     emit(NewsDataSearchSuccessStates());
 
-
-    DioHelper.getData(
-        url: 'v2/everything',
-        query:{
-          'q': '$value',
+    DioHelper.getData(url: 'v2/everything', query: {
+      'q': '$value',
           'apiKey': 'cdad916ab5184dccaa943436cdae85d1',
         }
     ).then((value) {
-        newsSearch=value.data['articles'];
-        emit(NewsDataSearchSuccessStates());
-    }).catchError((error){
+      newsSearch = value.data['articles'];
+      emit(NewsDataSearchSuccessStates());
+    }).catchError((error) {
       print('${error.toString()} science');
       emit(NewsDataSearchErrorStates(error.toString()));
     });
   }
 
+  bool isDark = false;
 
-  bool isDark=false;
-  void changeAppMode(
-      {
-  bool? fromShared
-      })
-  {
-    if(fromShared!=null)
-      {
-        fromShared=isDark;
-      }else
-      {
-      isDark=! isDark;
-      }
-    SharedHelper.putBoolData(key: 'isDark', value: isDark).then((value)
-    {
-      emit(NewsChangeMoodStates());
+  void changeAppMode({bool? fromShared}) {
+    if (fromShared != null) {
+      fromShared = isDark;
+    } else {
+      isDark = !isDark;
+    }
+    SharedHelper.putBoolData(key: 'isDark', value: isDark).then((value) {
       print(isDark);
-
+      emit(NewsChangeMoodStates());
     });
   }
 

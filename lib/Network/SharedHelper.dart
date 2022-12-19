@@ -1,6 +1,5 @@
 
 
-import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedHelper{
@@ -12,19 +11,15 @@ static init()async{
   sharedPreferences =await SharedPreferences.getInstance();
 
 }
-static Future<bool?> putBoolData({
-  @required String? key,
-  @required bool? value
-})async
+static Future<bool?> putBoolData(
+      {required String key, required bool value})async
 {
-
-  return await sharedPreferences?.setBool(key!, value!);
-}
+  return await sharedPreferences!.setBool(key, value);
+  }
 
  static bool? getBoolData({
-  @required String? value
-})
+   required String value})
 {
-   return sharedPreferences?.getBool(value!);
-}
+  return sharedPreferences!.getBool(value);
+  }
 }
